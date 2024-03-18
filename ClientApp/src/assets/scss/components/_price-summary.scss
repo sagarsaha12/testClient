@@ -1,5 +1,3 @@
-
-
 .price-summary-box {
   background-color: var(--main-bg);
   padding: 10px 14px 14px 14px;
@@ -8,7 +6,7 @@
 
 .price-summary-list {
   .list-item {
-    & + .list-item {
+    &+.list-item {
       margin-top: 12px;
     }
   }

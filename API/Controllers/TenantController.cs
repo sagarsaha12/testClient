@@ -33,16 +33,18 @@ namespace testClient.Controllers
         public IActionResult Post([FromBody] Tenant model)
         {
             _context.Tenant.Add(model);
-            var returnData = this._context.SaveChanges();
-            return Ok(returnData);
+            this._context.SaveChanges();
+            return Ok(model.Id);
         }
 
         /// <summary>Retrieves a list of tenants based on specified filters</summary>
-        /// <param name="filters">The filter criteria in JSON format. Use the following format: [{"Property": "PropertyName", "Operator": "Equal", "Value": "FilterValue"}] </param>
+        /// <param name="filters">The filter criteria in JSON format. Use the following format: [{"PropertyName": "PropertyName", "Operator": "Equal", "Value": "FilterValue"}] </param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">The page size.</param>
         /// <returns>The filtered list of tenants</returns>
         [HttpGet]
         [UserAuthorize("Tenant",Entitlements.Read)]
-        public IActionResult Get([FromQuery] string filters)
+        public IActionResult Get([FromQuery] string filters, int pageNumber = 1, int pageSize = 10)
         {
             List<FilterCriteria> filterCriteria = null;
             if (!string.IsNullOrEmpty(filters))
@@ -51,8 +53,10 @@ namespace testClient.Controllers
             }
 
             var query = _context.Tenant.AsQueryable();
+            int skip = (pageNumber - 1) * pageSize;
             var result = FilterService<Tenant>.ApplyFilter(query, filterCriteria);
-            return Ok(result);
+            var paginatedResult = result.Skip(skip).Take(pageSize).ToList();
+            return Ok(paginatedResult);
         }
 
         /// <summary>Retrieves a specific tenant by its primary key</summary>
@@ -100,18 +104,7 @@ namespace testClient.Controllers
                 return BadRequest("Mismatched Id");
             }
 
-            var entityData = _context.Tenant.FirstOrDefault(entity => entity.Id == id);
-            if (entityData == null)
-            {
-                return NotFound();
-            }
-
-            var propertiesToUpdate = typeof(Tenant).GetProperties().Where(property => property.Name != "Id").ToList();
-            foreach (var property in propertiesToUpdate)
-            {
-                property.SetValue(entityData, property.GetValue(updatedEntity));
-            }
-
+            this._context.Tenant.Update(updatedEntity);
             var returnData = this._context.SaveChanges();
             return Ok(returnData);
         }

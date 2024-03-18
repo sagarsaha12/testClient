@@ -88,7 +88,7 @@
                 font-size: 16px;
                 color: var(--secondary-text-color);
 
-                & + .profile-text {
+                &+.profile-text {
                     margin-left: 6px;
                 }
             }
@@ -113,7 +113,7 @@
 
         /* TODO(mdc-migration): The following rule targets internal classes of menu that may no longer apply for the MDC version.*/
         mat-menu {
-            & + .close-btn {
+            &+.close-btn {
                 margin-left: 2px;
             }
         }
@@ -226,7 +226,7 @@
 
         .tab-badge-text-box {
             .tab-badge-text {
-                & + .tab-badge-text {
+                &+.tab-badge-text {
                     padding-left: 3px;
                 }
             }

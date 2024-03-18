@@ -95,7 +95,7 @@
             }
 
             .parameter-item {
-                & + .parameter-item {
+                &+.parameter-item {
 
                     .form-view-name-field,
                     .controls-field,
@@ -115,7 +115,7 @@
             }
 
             .parameter-child-item {
-                & + .parameter-child-item {
+                &+.parameter-child-item {
 
                     .form-view-name-field,
                     .controls-field,
@@ -133,7 +133,7 @@
                     }
                 }
 
-                & + .column-view {
+                &+.column-view {
                     > :first-child {
                         .controls-field {
                             margin-top: 6px;
@@ -148,13 +148,13 @@
                         }
 
                         &:has(.parameter-childs-list:not(:empty)) {
-                            * > .controls-field {
+                            *>.controls-field {
                                 border-radius: 0;
                             }
                         }
 
                         // &:not(:first-child) {
-                        > * > {
+                        >*> {
                             .controls-field:not(:empty) {
                                 padding-bottom: 10px;
                                 border-radius: 0 0 6px 6px;
@@ -210,7 +210,7 @@
         margin-bottom: 12px;
 
         .template-list-item {
-            & + .template-list-item:not(:empty) {
+            &+.template-list-item:not(:empty) {
                 display: block;
                 padding-top: 12px;
                 border-top: 1px solid var(--border-color-light);
@@ -271,7 +271,7 @@
             }
 
             .parameter-item {
-                & + .parameter-item {
+                &+.parameter-item {
 
                     .form-view-name-field,
                     .controls-field,
@@ -362,7 +362,7 @@
 
         .comp-text {
             .comp-title {
-                & + .comp-title {
+                &+.comp-title {
                     margin-left: 4px;
                 }
             }
@@ -391,12 +391,12 @@
                     margin-left: 6px;
                 }
 
-                & + .comp-text {
+                &+.comp-text {
                     margin-left: 0;
                 }
             }
 
-            & > {
+            &> {
 
                 .comp-title,
                 .comp-text {
@@ -412,7 +412,7 @@
 
     .read-value {
         &:empty {
-            & + .notes-value-wrapper {
+            &+.notes-value-wrapper {
                 margin-top: 0;
             }
         }

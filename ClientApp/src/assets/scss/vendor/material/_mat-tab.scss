@@ -65,7 +65,7 @@
             }
         }
 
-        & > .mat-mdc-tab-header {
+        &>.mat-mdc-tab-header {
             background: var(--bg-color-4);
             padding: 10px 5px 0 35px;
             border-bottom: 1px solid #ced5e3;
@@ -202,7 +202,7 @@
             opacity: 1;
             overflow: visible;
 
-            & + .mdc-tab {
+            &+.mdc-tab {
                 margin-left: 32px;
             }
 

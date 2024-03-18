@@ -257,7 +257,7 @@ textarea {
             .dummy-form-fields {
                 &-item {
                     &-list-item {
-                        & + .dummy-form-fields-item-list-item {
+                        &+.dummy-form-fields-item-list-item {
                             padding-top: 16px;
                             border-top: 1px solid var(--border-color-light);
                             margin-top: 16px;

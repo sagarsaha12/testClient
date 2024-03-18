@@ -40,7 +40,7 @@
   }
 
   &.mat-mdc-checkbox .mdc-checkbox {
-    .mdc-checkbox__native-control:not([disabled]):focus ~ .mdc-checkbox__ripple {
+    .mdc-checkbox__native-control:not([disabled]):focus~.mdc-checkbox__ripple {
       opacity: 0;
     }
   }
@@ -180,7 +180,7 @@
       align-items: flex-start;
     }
 
-    & + .mat-mdc-checkbox {
+    &+.mat-mdc-checkbox {
       margin-top: 9px;
     }
 

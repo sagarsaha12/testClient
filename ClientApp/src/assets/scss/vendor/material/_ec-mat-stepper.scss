@@ -75,7 +75,7 @@
       }
 
       .mat-step-icon-state-edit {
-        & + .mat-step-label {
+        &+.mat-step-label {
           .mat-step-text-label {
             color: var(--color-3);
           }
@@ -108,11 +108,13 @@
         margin-left: auto;
       }
     }
+
     @media only screen and (max-width: 1080px) {
-      .mat-step-text-label{
+      .mat-step-text-label {
         display: none;
       }
-      .mat-stepper-horizontal-line{
+
+      .mat-stepper-horizontal-line {
         border: none;
       }
     }

@@ -5,9 +5,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { HomeComponent } from './home.component';
 import { TemplateComponent } from '../template/template/template.component';
 
-
 const routes: Routes = [
-  { path: '',
+  {
+    path: '',
     component: HomeComponent,
     children: [{
       path: '',
@@ -18,10 +18,10 @@ const routes: Routes = [
       component: DashboardComponent
     },
     {
-      path: 'user',
+      path: ':entityName',
       component: TemplateComponent
     }
-  ]
+    ]
   }
 ];
 

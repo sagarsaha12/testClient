@@ -1,5 +1,3 @@
-
-
 // common container style. eg: visit component container.
 
 .ec-container {
@@ -64,7 +62,7 @@
     }
 
     &-child-box {
-        & + .ec-container-child-box {
+        &+.ec-container-child-box {
             padding-top: var(--ec-container-child-box-gap);
             border-top: 1px solid var(--border-color-light);
             margin-top: var(--ec-container-child-box-gap);

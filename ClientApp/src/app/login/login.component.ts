@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginInfoPayload } from './login-info-payload';
-import { Subject, first, takeUntil } from 'rxjs';
-import { AuthService } from '../auth/auth.service';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../angular-app-services/auth.service';
 import { TokenService } from '../angular-app-services/token.service';
+import { AppConfigService } from '../app-config.service';
+import { SweetAlertService } from '../angular-app-services/sweet-alert.service';
 
 
 @Component({
@@ -12,16 +14,19 @@ import { TokenService } from '../angular-app-services/token.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   private formSubmitAttempt: boolean = false;
   protected destroy$ = new Subject();
+  hide = true;
+  tenantTitle: string = '';
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
     private tokenService: TokenService,
+    private sweetAlertService: SweetAlertService
   ) {
     if (!this.tokenService.isAuthTokenExpired()) {
       this.navigateTo();
@@ -29,6 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tenantTitle = AppConfigService.appConfig.app.title;
     this.form = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
@@ -44,16 +50,19 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      let loginDetail: LoginInfoPayload = {
+      const loginDetail: LoginInfoPayload = {
         userName: this.form.value.userName,
         password: this.form.value.password
       };
       this.authService.login(loginDetail)
-        .pipe(first(), takeUntil(this.destroy$))
+        .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (token: any) => {
             this.tokenService.setToken(token);
             this.navigateTo();
+          },
+          error: () => {
+            this.sweetAlertService.showError('Invalid username or password');
           }
         });
     }

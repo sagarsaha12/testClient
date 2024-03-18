@@ -33,16 +33,18 @@ namespace testClient.Controllers
         public IActionResult Post([FromBody] Entity model)
         {
             _context.Entity.Add(model);
-            var returnData = this._context.SaveChanges();
-            return Ok(returnData);
+            this._context.SaveChanges();
+            return Ok(model.Id);
         }
 
         /// <summary>Retrieves a list of entitys based on specified filters</summary>
-        /// <param name="filters">The filter criteria in JSON format. Use the following format: [{"Property": "PropertyName", "Operator": "Equal", "Value": "FilterValue"}] </param>
+        /// <param name="filters">The filter criteria in JSON format. Use the following format: [{"PropertyName": "PropertyName", "Operator": "Equal", "Value": "FilterValue"}] </param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">The page size.</param>
         /// <returns>The filtered list of entitys</returns>
         [HttpGet]
         [UserAuthorize("Entity",Entitlements.Read)]
-        public IActionResult Get([FromQuery] string filters)
+        public IActionResult Get([FromQuery] string filters, int pageNumber = 1, int pageSize = 10)
         {
             List<FilterCriteria> filterCriteria = null;
             if (!string.IsNullOrEmpty(filters))
@@ -50,9 +52,11 @@ namespace testClient.Controllers
                 filterCriteria = JsonHelper.Deserialize<List<FilterCriteria>>(filters);
             }
 
-            var query = _context.Entity.AsQueryable();
+            var query = _context.Entity.IncludeRelated().AsQueryable();
+            int skip = (pageNumber - 1) * pageSize;
             var result = FilterService<Entity>.ApplyFilter(query, filterCriteria);
-            return Ok(result);
+            var paginatedResult = result.Skip(skip).Take(pageSize).ToList();
+            return Ok(paginatedResult);
         }
 
         /// <summary>Retrieves a specific entity by its primary key</summary>
@@ -63,7 +67,7 @@ namespace testClient.Controllers
         [UserAuthorize("Entity",Entitlements.Read)]
         public IActionResult GetById([FromRoute] Guid id)
         {
-            var entityData = _context.Entity.FirstOrDefault(entity => entity.Id == id);
+            var entityData = _context.Entity.IncludeRelated().FirstOrDefault(entity => entity.Id == id);
             return Ok(entityData);
         }
 
@@ -75,7 +79,7 @@ namespace testClient.Controllers
         [Route("{id:Guid}")]
         public IActionResult DeleteById([FromRoute] Guid id)
         {
-            var entityData = _context.Entity.FirstOrDefault(entity => entity.Id == id);
+            var entityData = _context.Entity.IncludeRelated().FirstOrDefault(entity => entity.Id == id);
             if (entityData == null)
             {
                 return NotFound();
@@ -100,18 +104,7 @@ namespace testClient.Controllers
                 return BadRequest("Mismatched Id");
             }
 
-            var entityData = _context.Entity.FirstOrDefault(entity => entity.Id == id);
-            if (entityData == null)
-            {
-                return NotFound();
-            }
-
-            var propertiesToUpdate = typeof(Entity).GetProperties().Where(property => property.Name != "Id").ToList();
-            foreach (var property in propertiesToUpdate)
-            {
-                property.SetValue(entityData, property.GetValue(updatedEntity));
-            }
-
+            this._context.Entity.Update(updatedEntity);
             var returnData = this._context.SaveChanges();
             return Ok(returnData);
         }

@@ -35,7 +35,7 @@ namespace testClient.Controllers
         /// Retrieves and returns layout data based on entity and layout type.
         /// </summary>
         /// <param name="entity">Entity name</param>
-        /// <param name="layoutType">Layout type as List = 1, CardView = 2</param>
+        /// <param name="layoutType">Layout type as List= 1, Add= 2 and Edit= 3</param>
         /// <returns>Returns json.</returns>
         [HttpGet]
         [Route("{entity}/layout")]
@@ -57,8 +57,11 @@ namespace testClient.Controllers
                 case LayoutType.List:
                     type = "List";
                     break;
-                case LayoutType.CardView:
-                    type = "CardView";
+                case LayoutType.Edit:
+                    type = "Edit";
+                    break;
+                case LayoutType.Add:
+                    type = "Add";
                     break;
             }
 

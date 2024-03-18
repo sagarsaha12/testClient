@@ -1,39 +1,63 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
+import { MenuService } from 'src/app/angular-app-services/menu.service';
+import { LogoutComponent } from 'src/app/logout/logout.component';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss'
 })
-export class SideBarComponent {
+export class SideBarComponent implements OnInit, OnDestroy {
   isSidebarToggled = true;
- 
-  constructor(private router: Router) { }
+  menuData: any;
 
-  ngOnInit() {
+  private destroy = new Subject();
 
+  constructor(
+    private menuService: MenuService,
+    public dialog: MatDialog,
+  ) { }
+
+  ngOnInit(): void {
+    this.menuService.getMenu()
+      .pipe(takeUntil(this.destroy))
+      .subscribe(data => {
+        this.menuData = data;
+      });
   }
 
-  toggleSidebar() {
-    this.isSidebarToggled = !this.isSidebarToggled;
+  ngOnDestroy(): void {
+    this.destroy.next(true);
+    this.destroy.complete();
   }
 
-  toggleSubMenu(event: MouseEvent) {
-    const target = event.currentTarget as HTMLElement;
-    const submenu = target.nextElementSibling as HTMLElement;
+  showSubMenu(event: MouseEvent): void {
+    const targetAttr = (event.target as HTMLElement),
+      subMenuItem = (targetAttr.querySelector('.sub-nav-link') as HTMLElement);
 
-    if (submenu.style.display === 'block') {
-      submenu.style.display = 'none';
-      target.parentElement?.classList.remove('active');
-    } else {
-      submenu.style.display = 'block';
-      target.parentElement?.classList.add('active');
+    if (subMenuItem) {
+      subMenuItem.style.top = targetAttr.getBoundingClientRect().top + 'px';
+      subMenuItem.style.left = targetAttr.getBoundingClientRect().width - 2 + 'px';
     }
   }
 
-  navigateTo(route: string) {
-    this.router.navigate(['/dashboard']);
-  }
+  openLogoutDialog(event: any) {
+    const targetAttr = event.target.getBoundingClientRect(),
+      dialogConfig = new MatDialogConfig();
 
+    dialogConfig.position = {
+      left: targetAttr.x + targetAttr.width + 15 + 'px',
+      bottom: '15px'
+    };
+
+    this.dialog.open(LogoutComponent, {
+      width: '250px',
+      panelClass: 'logout-dialog-wrapper',
+      position: dialogConfig.position,
+      autoFocus: false,
+      backdropClass: 'no-back-drop',
+    });
+  }
 }

@@ -1,5 +1,3 @@
-
-
 .blue-box {
   background-color: #f4faff;
   padding: 20px;
@@ -19,7 +17,7 @@
       padding-right: 20px;
     }
 
-    & + .blue-box-section {
+    &+.blue-box-section {
       padding-left: 20px;
 
       &:before {

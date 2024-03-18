@@ -61,26 +61,26 @@ namespace testClient.Entities
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<UserInRole>? UserInRoles { get; set; }
+        public ICollection<UserInRole>? UserInRole { get; set; }
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<UserToken>? UserTokens { get; set; }
+        public ICollection<UserToken>? UserToken { get; set; }
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<RoleEntitlement>? RoleEntitlements { get; set; }
+        public ICollection<RoleEntitlement>? RoleEntitlement { get; set; }
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<Entity>? Entitys { get; set; }
+        public ICollection<Entity>? Entity { get; set; }
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<User>? Users { get; set; }
+        public ICollection<User>? User { get; set; }
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<Role>? Roles { get; set; }
+        public ICollection<Role>? Role { get; set; }
     }
 }

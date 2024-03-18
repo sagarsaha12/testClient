@@ -51,7 +51,7 @@ namespace testClient.Filter
 
         private static Expression GetFilterExpression(Expression property, ConstantExpression constant, string op)
         {
-            switch (op)
+            switch (op.ToLower())
             {
                 case "equals":
                 case "=":

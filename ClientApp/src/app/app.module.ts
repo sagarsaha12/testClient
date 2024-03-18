@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './angular-app-services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './home/home.module';
@@ -11,7 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 import { PermissionsService } from './angular-app-services/permissions.service';
 import { HttpRequestInterceptor } from './angular-app-services/Interceptor/http.interceptor';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { HttpRequestInterceptor } from './angular-app-services/Interceptor/http.
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HomeModule
+    HomeModule,
+    MatProgressBarModule
   ],
   exports: [
     BrowserModule

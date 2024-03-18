@@ -1,7 +1,7 @@
 // media querry variable
 $break-desktop-min: 992px;
 $break-large-xxl: 1599px;
-$break-large-xl: 1350px;
+$break-large-xl: 992px;
 $break-large: 1200px;
 $break-tab: 991px;
 
@@ -10,6 +10,7 @@ $break-tab: 991px;
         @content;
     }
 }
+
 @mixin desktop-xxl {
     @media (max-width: $break-large-xxl) {
         @content;

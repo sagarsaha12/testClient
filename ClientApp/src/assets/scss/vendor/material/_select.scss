@@ -369,7 +369,7 @@
         text-overflow: ellipsis;
         margin-top: 4px;
 
-        + .option-details-text {
+        +.option-details-text {
           position: relative;
           padding-left: 20px;
 
@@ -434,7 +434,7 @@
     .option-item {
       padding: 6px 14px 6px;
 
-      & + .option-item {
+      &+.option-item {
         padding-top: 6px;
 
         &::before {
@@ -480,7 +480,7 @@
     line-height: initial;
     position: relative;
 
-    + .option-item {
+    +.option-item {
       padding-top: 16px;
 
       &::before {
@@ -515,7 +515,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
 
-        + .option-details-text {
+        +.option-details-text {
           position: relative;
           padding-left: 20px;
 
@@ -640,7 +640,7 @@
         line-height: 18px;
         color: var(--primary-text-color);
 
-        & + .option-text {
+        &+.option-text {
           display: flex;
           align-items: center;
 
@@ -684,7 +684,7 @@
         color: var(--primary-text-color);
         @include truncate;
 
-        & + .option-text {
+        &+.option-text {
 
           &:before {
             content: "";

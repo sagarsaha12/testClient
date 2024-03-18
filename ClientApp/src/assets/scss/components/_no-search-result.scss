@@ -1,4 +1,3 @@
-
 // all search & mat select search feedback common style
 
 /* if it's for mat select also use this "no-data-wrapper-select */
@@ -27,8 +26,8 @@
         line-height: 20px;
         color: var(--primary-text-color);
 
-        & + .no-data-text,
-        & + .mat-mdc-button {
+        &+.no-data-text,
+        &+.mat-mdc-button {
             margin-left: 4px;
         }
     }

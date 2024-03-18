@@ -58,7 +58,7 @@
 						}
 
 						.k-scheduler-header {
-							tr + tr {
+							tr+tr {
 								display: none;
 							}
 
@@ -67,7 +67,7 @@
 							}
 						}
 
-						+ .k-scheduler-pane {
+						+.k-scheduler-pane {
 							margin-top: 0;
 							border-top: none;
 							padding-top: 0;
@@ -138,7 +138,7 @@
 			}
 		}
 
-		.k-button-group > .k-button:first-child:not(:only-child) {
+		.k-button-group>.k-button:first-child:not(:only-child) {
 			border-start-end-radius: 6px;
 			border-end-end-radius: 6px;
 		}
@@ -211,7 +211,7 @@
 				.k-scheduler-pane {
 					display: none;
 
-					+ .k-scheduler-pane {
+					+.k-scheduler-pane {
 						display: flex;
 
 						// padding-top: 18px;
@@ -259,7 +259,7 @@
 				}
 
 				tbody {
-					tr + tr {
+					tr+tr {
 						display: none;
 					}
 				}
@@ -282,14 +282,14 @@
 
 				.k-scheduler-pane {
 					.k-scheduler-times {
-						tr + tr {
+						tr+tr {
 							display: none;
 						}
 					}
 
-					+ .k-scheduler-pane {
+					+.k-scheduler-pane {
 						.k-scheduler-times {
-							tr + tr {
+							tr+tr {
 								display: table-row;
 							}
 						}
@@ -309,7 +309,7 @@
 						tr {
 							display: none;
 
-							+ tr {
+							+tr {
 								display: table-row;
 							}
 						}

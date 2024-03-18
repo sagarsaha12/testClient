@@ -253,8 +253,8 @@ app-covid19-history {
 app-visit-summary-dialog {
     .list-item {
 
-        > .comp-title,
-        > .comp-text {
+        >.comp-title,
+        >.comp-text {
             .comp-high {
                 margin-left: 6px;
             }

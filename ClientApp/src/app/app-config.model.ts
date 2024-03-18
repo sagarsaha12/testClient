@@ -13,6 +13,9 @@ export interface IAppConfig {
     api: {
         url: string;
     };
+    app: {
+        title: string;
+    };
     buildInfo: {
         number: string;
         createdOn: string;

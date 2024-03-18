@@ -11,7 +11,10 @@
         "appInsights": false
     },
     "api": {
-        "url": "https://ntlowcodeapi.azurewebsites.net"
+        "url": "https://clienttest.azurewebsites.net"
+    },
+    "app": {
+        "title": "testClient"
     },
     "buildInfo": {
         "number": "1.0.0.0",

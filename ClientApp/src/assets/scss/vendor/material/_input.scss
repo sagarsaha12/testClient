@@ -362,7 +362,7 @@
       display: block;
     }
 
-    & + .number-cntrlr-btn {
+    &+.number-cntrlr-btn {
       top: 50%;
     }
   }
@@ -615,7 +615,7 @@
         display: flex;
         cursor: pointer;
 
-        & + .result-list-item {
+        &+.result-list-item {
           margin-top: 16px;
         }
       }

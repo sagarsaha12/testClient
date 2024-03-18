@@ -5,7 +5,7 @@
   ::ng-deep {
     .expansion-panel-list {
       .mat-expansion-panel {
-        & + .mat-expansion-panel {
+        &+.mat-expansion-panel {
           margin-top: 20px;
         }
       }
@@ -115,7 +115,7 @@
             }
           }
 
-          & + .mat-expansion-panel {
+          &+.mat-expansion-panel {
             border-top: 1px solid var(--border-color-light);
           }
 

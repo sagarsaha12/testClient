@@ -14,9 +14,14 @@ namespace testClient.Models
 
         List = 1,
         /// <summary> 
-        /// Allows card view layout.
+        /// Allows add layout.
         /// </summary>
 
-        CardView = 2
+        Add = 2,
+        /// <summary> 
+        /// Allows  edit layout.
+        /// </summary>
+
+        Edit = 3
     }
 }
