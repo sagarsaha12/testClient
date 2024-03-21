@@ -1,13 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Linq.Expressions;
 
 namespace testClient.Filter
 {
     public static class FilterService<TEntity>
     {
-        public static IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, List<FilterCriteria> filters)
+        public static IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, List<FilterCriteria> filters, string searchTerm)
         {
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = ApplyContainsSearch(query, searchTerm);
+            }
+
             if (filters == null || filters.Count == 0)
             {
                 return query;
@@ -76,6 +82,38 @@ namespace testClient.Filter
             }
 
             return Expression.Constant(false);
+        }
+
+        private static IQueryable<TEntity> ApplyContainsSearch<TEntity>(IQueryable<TEntity> query, string searchTerm)
+        {
+            IEnumerable<string> stringProperties =  GetStringProperties();
+            ParameterExpression parameter =  Expression.Parameter(typeof(TEntity), "x");
+            Expression combinedExpression = null;
+            foreach (var property in stringProperties)
+            {
+                Expression propertyExpression = Expression.Property(parameter, property);
+                Expression searchTermExpression = Expression.Constant(searchTerm);
+                MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+                MethodCallExpression methodCall = Expression.Call(propertyExpression, method, searchTermExpression);
+                if (combinedExpression == null)
+                {
+                    combinedExpression = methodCall;
+                }
+                else
+                {
+                    combinedExpression = Expression.OrElse(combinedExpression, methodCall);
+                }
+            }
+
+             Expression<Func<TEntity, bool>> lambda = Expression.Lambda<Func<TEntity, bool>>(combinedExpression, parameter);
+            return query.Where(lambda);
+        }
+
+        private static IEnumerable<string> GetStringProperties()
+        {
+            var entityType = typeof(TEntity);
+            var stringProperties = entityType.GetProperties().Where(p => p.PropertyType == typeof(string)).Select(p => p.Name);
+            return stringProperties;
         }
     }
 }

@@ -43,6 +43,6 @@ namespace testClient.Entities
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<Books>? Books { get; set; }
+        public ICollection<Books>? BooksInfo { get; set; }
     }
 }

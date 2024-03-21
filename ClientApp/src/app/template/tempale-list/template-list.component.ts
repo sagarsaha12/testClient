@@ -59,7 +59,7 @@ export class TemplateListComponent implements OnInit, OnChanges, OnDestroy {
 
   addRecord(): void {
     const dialog = this.dialog.open(TemplateAddComponent, {
-      width: '800px',
+      width: '50vw',
       height: '100vh',
       position: {
         top: '0px',
@@ -106,6 +106,36 @@ export class TemplateListComponent implements OnInit, OnChanges, OnDestroy {
     if (confirmed) {
       this.deleteData(id);
     }
+  }
+
+  editRecordById(id: string): void {
+    const dialog = this.dialog.open(TemplateAddComponent, {
+      width: '50vw',
+      height: '100vh',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
+      panelClass: [
+        'animate__animated',
+        'animate__slideInRight',
+        'no-border-wrapper',
+      ],
+      autoFocus: false,
+      disableClose: true
+    });
+    dialog.componentInstance.entityName = this.entityName;
+    dialog.componentInstance.id = id;
+    dialog.componentInstance.saved
+      .pipe(takeUntil(this.destroy))
+      .subscribe({
+        next: (status) => {
+          dialog.close();
+          if (status) {
+            this.refresh.emit();
+          }
+        }
+      });
   }
 
   onSearch(): void {

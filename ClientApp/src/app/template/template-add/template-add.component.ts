@@ -119,18 +119,18 @@ export class TemplateAddComponent implements OnInit, OnDestroy {
       .subscribe({
         next: data => {
           this.form = new FormGroup({});
-          const apis = this.initializeForm(this.layoutData);
+          const apis = this.initializeForm(this.layoutData, data);
           this.getOptions(data, apis);
         }
       });
   }
 
-  private initializeForm(fields: any[]): Array<Observable<any[]>> {
+  private initializeForm(fields: any[], data?: any): Array<Observable<any[]>> {
     const apis: Array<Observable<any[]>> = [];
     // Loop through the fields and add form controls
     fields.forEach(field => {
       if (field.type === 'section') {
-        apis.push(...this.initializeForm(field.fields));
+        apis.push(...this.initializeForm(field.fields, data));
       } else {
         field.fieldName = _camelCase(field.fieldName);
         const defaultValue = this.getDefaultValue(field),
@@ -150,6 +150,12 @@ export class TemplateAddComponent implements OnInit, OnDestroy {
           } else {
             validators.push(Validators.pattern(/^-?\d+$/));
           }
+        }
+
+        if ((field.dataType.toLowerCase() === 'datetime' || field.dataType.toLowerCase() === 'date') && data?.[field.fieldName]) {
+          const date = Date.parse(data[field.fieldName] + 'Z'),
+            localDate = isNaN(date) ? date : new Date(data[field.fieldName] + 'Z');
+          data[field.fieldName] = localDate;
         }
 
         this.form?.addControl(field.fieldName, new FormControl(defaultValue, validators));

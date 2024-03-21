@@ -19,7 +19,8 @@
 
     <div class="preview-tem-dtl-column-wrapper main-section-right-wrapper row">
         <ng-container *ngFor="let section of mappedData; let i=index">
-            <div class="col-md-{{section.width}}">
+            <div
+                class="col-md-{{(section.column && section.column > 0 && section.column <= 4) ? (section.column * 3) : 12}}">
                 <div class="cards">
                     <div class="d-flex align-items-center card-title">
                         <p class="section-header tuncate-text">
@@ -28,7 +29,8 @@
                     </div>
                     <div class="row">
                         <!-- <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 col-xs-12" *ngFor="let field of section.fields"> -->
-                        <div class="col-md-{{field.width}}" *ngFor="let field of section.fields">
+                        <div class="col-md-{{(field.column && field.column > 0 && field.column <= 4) ? (field.column * 3) : 12}}"
+                            *ngFor="let field of section.fields">
                             <div class="preview-data">
                                 <p *ngIf="!field.icon" class="font-body-medium color-font-preview">{{field.label}}</p>
                                 <p class="font-title-xs fw-normal color-font-preview">

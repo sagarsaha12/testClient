@@ -21,26 +21,26 @@ namespace testClient.Data
             modelBuilder.Entity<Role>().HasKey(a => a.Id);
             modelBuilder.Entity<Author>().HasKey(a => a.Id);
             modelBuilder.Entity<Books>().HasKey(a => a.Id);
-            modelBuilder.Entity<UserInRole>().HasOne(a => a.Tenant).WithMany(b => b.UserInRole).HasForeignKey(c => c.TenantId);
-            modelBuilder.Entity<UserInRole>().HasOne(a => a.Role).WithMany(b => b.UserInRole).HasForeignKey(c => c.RoleId);
-            modelBuilder.Entity<UserInRole>().HasOne(a => a.User).WithMany(b => b.UserInRole).HasForeignKey(c => c.UserId);
+            modelBuilder.Entity<UserInRole>().HasOne(a => a.Tenant).WithMany(b => b.UserInRoleInfo).HasForeignKey(c => c.TenantId);
+            modelBuilder.Entity<UserInRole>().HasOne(a => a.Role).WithMany(b => b.UserInRoleInfo).HasForeignKey(c => c.RoleId);
+            modelBuilder.Entity<UserInRole>().HasOne(a => a.User).WithMany(b => b.UserInRoleInfo).HasForeignKey(c => c.UserId);
             modelBuilder.Entity<UserInRole>().HasOne(a => a.CreatedByUser).WithMany().HasForeignKey(c => c.CreatedBy);
             modelBuilder.Entity<UserInRole>().HasOne(a => a.UpdatedByUser).WithMany().HasForeignKey(c => c.UpdatedBy);
-            modelBuilder.Entity<UserToken>().HasOne(a => a.Tenant).WithMany(b => b.UserToken).HasForeignKey(c => c.TenantId);
-            modelBuilder.Entity<UserToken>().HasOne(a => a.User).WithMany(b => b.UserToken).HasForeignKey(c => c.UserId);
-            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.Tenant).WithMany(b => b.RoleEntitlement).HasForeignKey(c => c.TenantId);
-            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.Role).WithMany(b => b.RoleEntitlement).HasForeignKey(c => c.RoleId);
-            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.Entity).WithMany(b => b.RoleEntitlement).HasForeignKey(c => c.EntityId);
-            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.CreatedByUser).WithMany(b => b.RoleEntitlement).HasForeignKey(c => c.CreatedBy);
+            modelBuilder.Entity<UserToken>().HasOne(a => a.Tenant).WithMany(b => b.UserTokenInfo).HasForeignKey(c => c.TenantId);
+            modelBuilder.Entity<UserToken>().HasOne(a => a.User).WithMany(b => b.UserTokenInfo).HasForeignKey(c => c.UserId);
+            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.Tenant).WithMany(b => b.RoleEntitlementInfo).HasForeignKey(c => c.TenantId);
+            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.Role).WithMany(b => b.RoleEntitlementInfo).HasForeignKey(c => c.RoleId);
+            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.Entity).WithMany(b => b.RoleEntitlementInfo).HasForeignKey(c => c.EntityId);
+            modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.CreatedByUser).WithMany(b => b.RoleEntitlementInfo).HasForeignKey(c => c.CreatedBy);
             modelBuilder.Entity<RoleEntitlement>().HasOne(a => a.UpdatedByUser).WithMany().HasForeignKey(c => c.UpdatedBy);
-            modelBuilder.Entity<Entity>().HasOne(a => a.Tenant).WithMany(b => b.Entity).HasForeignKey(c => c.TenantId);
-            modelBuilder.Entity<Entity>().HasOne(a => a.CreatedByUser).WithMany(b => b.Entity).HasForeignKey(c => c.CreatedBy);
+            modelBuilder.Entity<Entity>().HasOne(a => a.Tenant).WithMany(b => b.EntityInfo).HasForeignKey(c => c.TenantId);
+            modelBuilder.Entity<Entity>().HasOne(a => a.CreatedByUser).WithMany(b => b.EntityInfo).HasForeignKey(c => c.CreatedBy);
             modelBuilder.Entity<Entity>().HasOne(a => a.UpdatedByUser).WithMany().HasForeignKey(c => c.UpdatedBy);
-            modelBuilder.Entity<User>().HasOne(a => a.Tenant).WithMany(b => b.User).HasForeignKey(c => c.TenantId);
-            modelBuilder.Entity<Role>().HasOne(a => a.Tenant).WithMany(b => b.Role).HasForeignKey(c => c.TenantId);
-            modelBuilder.Entity<Role>().HasOne(a => a.CreatedByUser).WithMany(b => b.Role).HasForeignKey(c => c.CreatedBy);
+            modelBuilder.Entity<User>().HasOne(a => a.Tenant).WithMany(b => b.UserInfo).HasForeignKey(c => c.TenantId);
+            modelBuilder.Entity<Role>().HasOne(a => a.Tenant).WithMany(b => b.RoleInfo).HasForeignKey(c => c.TenantId);
+            modelBuilder.Entity<Role>().HasOne(a => a.CreatedByUser).WithMany(b => b.RoleInfo).HasForeignKey(c => c.CreatedBy);
             modelBuilder.Entity<Role>().HasOne(a => a.UpdatedByUser).WithMany().HasForeignKey(c => c.UpdatedBy);
-            modelBuilder.Entity<Books>().HasOne(a => a.Author).WithMany(b => b.Books).HasForeignKey(c => c.AuthorId);
+            modelBuilder.Entity<Books>().HasOne(a => a.Author).WithMany(b => b.BooksInfo).HasForeignKey(c => c.AuthorId);
         }
 
         public DbSet<UserInRole> UserInRole { get; set; }

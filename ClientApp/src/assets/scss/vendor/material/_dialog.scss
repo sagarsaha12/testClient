@@ -1,6 +1,6 @@
 ::ng-deep {
     .mdc-dialog {
-        --ec-dialog-padding: 32px;
+        --ec-dialog-padding: 25px;
 
         .mdc-dialog__container {
             .mdc-dialog__surface {
@@ -13,7 +13,7 @@
             .mdc-dialog__content {
                 padding: 0 calc(var(--ec-dialog-padding) / 2);
                 margin: 0 calc(-1 * var(--ec-dialog-padding) / 2);
-                height: calc(100vh - 151px);
+                height: calc(100vh - 162px);
                 overflow: auto;
                 @extend .ec-custom-scroll;
             }
@@ -27,7 +27,7 @@
     .mat-mdc-dialog-container {
         --mdc-dialog-container-color: var(--white);
         background-color: var(--mdc-dialog-container-color);
-        max-width: 934px !important;
+        // max-width: 934px !important;
         border-radius: 15px !important;
         box-shadow: 1px 1px 15px rgb(0 0 0 / 10%);
         overflow: auto;
@@ -624,5 +624,12 @@
         .form-control-bd-bt {
             padding: 6px !important;
         }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .mat-mdc-dialog-panel {
+        width: 100vw !important;
     }
 }

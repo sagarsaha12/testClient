@@ -22,6 +22,8 @@
         margin-right: -10px;
 
         .action-button {
+            color: var(--color-5);
+
             .mat-icon {
                 font-size: 17px !important;
 
@@ -73,6 +75,8 @@
 
     .filter-icon {
         cursor: pointer;
+        border: none;
+        background-color: transparent;
     }
 
     .clear-filter {

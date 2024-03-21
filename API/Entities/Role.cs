@@ -63,10 +63,10 @@ namespace testClient.Entities
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<UserInRole>? UserInRole { get; set; }
+        public ICollection<UserInRole>? UserInRoleInfo { get; set; }
         /// <summary>
         /// Collection navigation property representing associated 
         /// </summary>
-        public ICollection<RoleEntitlement>? RoleEntitlement { get; set; }
+        public ICollection<RoleEntitlement>? RoleEntitlementInfo { get; set; }
     }
 }

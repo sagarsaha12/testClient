@@ -2,14 +2,14 @@
   //background-color: var(--main-bg);
   width: 100%;
   min-width: 445px;
-  max-width: 445px;
+  // max-width: 445px;
   // height: 100vh;
   padding: 0 0 0 25px;
   border-right: 1px solid var(--border-color-dark);
 
   @include desktop-xl {
     min-width: 350px;
-    max-width: 350px;
+    // max-width: 350px;
     padding: 0 0 0 25px;
   }
 

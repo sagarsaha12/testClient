@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Option } from './layout-models';
+import { TooltipService } from 'src/app/angular-app-services/tooltip.service';
 
 @Component({
   selector: 'app-dynamic-layout',
@@ -9,7 +10,15 @@ import { Option } from './layout-models';
 })
 
 export class DynamicLayoutComponent {
-  @Input() formFields!: any[];
-  @Input() form!: FormGroup;
   @Input() fieldOptions: { [key: string]: Option[]; } = {};
+  @Input() form!: FormGroup;
+  @Input() formFields!: any[];
+
+  constructor(
+    private tooltipService: TooltipService
+  ) { }
+
+  public isTooltipDisabled(element: HTMLElement): boolean {
+    return this.tooltipService.isTooltipDisabled(element);
+  }
 }

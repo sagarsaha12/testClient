@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { MenuService } from 'src/app/angular-app-services/menu.service';
+import { TooltipService } from 'src/app/angular-app-services/tooltip.service';
 import { LogoutComponent } from 'src/app/logout/logout.component';
 
 @Component({
@@ -18,6 +19,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   constructor(
     private menuService: MenuService,
     public dialog: MatDialog,
+    private tooltipService: TooltipService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,10 @@ export class SideBarComponent implements OnInit, OnDestroy {
       subMenuItem.style.top = targetAttr.getBoundingClientRect().top + 'px';
       subMenuItem.style.left = targetAttr.getBoundingClientRect().width - 2 + 'px';
     }
+  }
+
+  isTooltipDisabled(element: HTMLElement): boolean {
+    return this.tooltipService.isTooltipDisabled(element);
   }
 
   openLogoutDialog(event: any) {

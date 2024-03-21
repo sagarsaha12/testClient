@@ -34,3 +34,29 @@
 .mat-check-box-field {
     padding: 7px 0px;
 }
+
+@media screen and (max-width: 992px) {
+    .col-md-9 {
+        width: 100%;
+    }
+
+    .col-md-3 {
+        width: 50%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .col-md-9 {
+        width: 100%;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .col-md-3 {
+        width: 100%;
+    }
+}

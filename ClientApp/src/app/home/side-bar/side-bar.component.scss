@@ -61,7 +61,7 @@
     min-height: 100vh;
     max-height: 100vh;
     background: var(--primary-color-darker);
-    padding-bottom: 45px;
+    padding-bottom: 25px;
     z-index: 100;
 
     @include desktop-xl {
@@ -112,6 +112,8 @@
             color: var(--white);
             padding: 5px 3px 3px 3px;
             transition-duration: 0.3s;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         &.active {
@@ -194,6 +196,9 @@
             margin-top: 10px;
             transition: 0.3s;
             cursor: pointer;
+            background: transparent;
+            border: none;
+            margin: auto;
 
             * {
                 pointer-events: none;

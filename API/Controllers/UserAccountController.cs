@@ -28,6 +28,10 @@ namespace testClient.Controllers
         /// <param name="model">User registration information.</param>
         /// <returns>Returns the user ID upon successful registration.</returns>
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Produces("application/json")]
         public IActionResult Register([FromBody] RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -67,6 +71,11 @@ namespace testClient.Controllers
         /// <param name="model">User login credentials.</param>
         /// <returns>Returns JWT and refresh token upon successful login.</returns>
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Produces("application/json")]
         public IActionResult Login([FromBody] LoginModel model)
         {
             if (ModelState.IsValid)
@@ -115,6 +124,11 @@ namespace testClient.Controllers
         /// <param name="refreshtoken">Refresh token information.</param>
         /// <returns>Returns new JWT and refresh token upon successful token refresh.</returns>
         [HttpPost("refresh")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Produces("application/json")]
         public IActionResult Refresh([FromBody] Token refreshtoken)
         {
             IActionResult response = Unauthorized();

@@ -163,13 +163,13 @@ export class TemplateComponent implements OnInit, OnDestroy {
           name: node.name,
           icon: node.icon,
           type: node.type,
-          width: node.width,
+          column: node.column,
           fields: node.fields.map((field: any) => {
             return {
               label: field.label,
               icon: field.icon,
               value: this.getFormattedData(record, field),
-              width: field.width
+              column: field.column
             };
           })
         };
